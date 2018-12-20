@@ -10,16 +10,16 @@ static bool getAuthorAndContentInternal(const char* articleContent,
 
 
 // returns true on success
-bool readArticle(const char* fileName, char** buffer,
+int readArticle(const char* fileName, char** buffer,
 		char** author, int* authorLen, char** content) {
 	if (!readArticleInternal(fileName, buffer)) {
-		return false;
+		return 0;
 	}
 	if (!getAuthorAndContentInternal(*buffer, author, authorLen, content)) {
 		releaseArticleBuffer(buffer);
-		return false;
+		return 0;
 	}
-	return true;
+	return 1;
 }
 
 // returns true on success
